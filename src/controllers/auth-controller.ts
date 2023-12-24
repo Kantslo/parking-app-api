@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import User from "models/User";
+import User from "../models/User.js";
 import addUserSchema from "../schemas/add-user-schema.js";
 
 export const createUser = async (req: Request, res: Response) => {
