@@ -1,11 +1,11 @@
 openapi: 3.0.0
 info:
-  title: Auth
+  title: Parking App
   description: API
   version: 0.1.9
 
 servers:
-  - url: mongodb+srv://gqancliani:tv7wxU9yrkNlxSxq@parking-app.c9rykod.mongodb.net/parking-app
+  - url: https://parking-app-api-production.up.railway.app/api
     description: production server
   - url: http://localhost:3000/api
     description: local server

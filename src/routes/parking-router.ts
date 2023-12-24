@@ -6,6 +6,6 @@ const parkingRouter = express.Router();
 
 parkingRouter.post("/register", createUser);
 parkingRouter.post("/login", login);
-parkingRouter.get("/users", authMiddleware, getAllUsers)
+parkingRouter.get("/users", authMiddleware, getAllUsers);
 
 export default parkingRouter;
