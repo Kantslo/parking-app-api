@@ -1,6 +1,6 @@
+import bodyParser from "body-parser";
 import express from "express";
 import cors from "cors";
-import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import connect from "./config/mongo.js";
 import swaggerMiddleware from "./middlewares/swagger-middleware.js";

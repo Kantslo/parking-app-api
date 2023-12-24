@@ -1,4 +1,4 @@
-import authMiddleware from "middlewares/auth-middleware.js";
+import authMiddleware from "../middlewares/auth-middleware.js";
 import { createUser, getAllUsers, login } from "../controllers/auth-controller.js";
 import express from "express";
 
