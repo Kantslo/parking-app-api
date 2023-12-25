@@ -10,13 +10,14 @@ const ifUserExists = (user: NewUser | null) => (value: string, helpers: CustomHe
 }
 
 const addUserSchema = async (data: NewUser) => {
+
   const user = await User.findOne({ email: data.email });
 
   return Joi.object<NewUser>({
     name: Joi.string().min(4).required(),
-    email: Joi.string().email().custom(ifUserExists(user)).required,
+    email: Joi.string().email().custom(ifUserExists(user)).required(),
     password: Joi.string().min(8).max(20).required(),
-  });
+  })
 };
 
 export default addUserSchema;

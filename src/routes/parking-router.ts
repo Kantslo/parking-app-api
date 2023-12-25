@@ -1,5 +1,5 @@
 import authMiddleware from "../middlewares/auth-middleware.js";
-import { createUser, getAllUsers, login } from "../controllers/auth-controller.js";
+import { createUser, getAllUsers, login } from "../controllers/parking-controller.js";
 import express from "express";
 
 const parkingRouter = express.Router();
