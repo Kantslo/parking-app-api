@@ -20,6 +20,10 @@ const userSchema = new Schema<UserType>({
     type: String,
     required: true,
     default: uuid,
+  },
+  admin: {
+    type: Schema.Types.Boolean,
+    default: false
   }
 });
 

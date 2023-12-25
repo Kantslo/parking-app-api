@@ -37,6 +37,29 @@ paths:
       responses:
         "201":
           description: user register successfully
+  /register admin:
+    post:
+      tags:
+        - Auth
+      requestBody:
+        description: admin registration request
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                name:
+                  type: string
+                password:
+                  type: string
+                email:
+                  type: string
+                admin:
+                  type: boolean
+      responses:
+        "201":
+          description: admin register successfully
   /login:
     post:
       tags:
