@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 const connect = () => {
   try {
-    const url = "mongodb+srv://gqancliani:urmSwXVXCe8HAZ4r@parking-app.h2jgyvm.mongodb.net/parking";
-    mongoose.connect(url);
+    const url = process.env.MONGO_URL!;
+    mongoose.connect(url)
   } catch (error) {
-    console.log(error);
-    return error;
+    console.log(error)
+    return error
   }
 }
 

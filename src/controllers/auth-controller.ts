@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import bcrypt from "bcrypt";
+import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
-import User from "../models/User.js";
+import User from "../models/User.js"
 import addUserSchema from "../schemas/add-user-schema.js";
 
 export const createUser = async (req: Request, res: Response) => {
@@ -23,16 +23,15 @@ export const createUser = async (req: Request, res: Response) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = new User({
-      name,
-      email,
-      password: hashedPassword
-    })
+      name, 
+      email, 
+      password: hashedPassword,
+    });
 
     await newUser.save();
-
-    return res.status(201).json(newUser);
+    return res.status(201).json(newUser)
   } catch (error) {
-    return res.status(401).json(error);
+    return res.status(401).json(error)
   }
 };
 
@@ -47,12 +46,11 @@ export const login = async (req: Request, res: Response) => {
         _v: 0,
       }
     ).select("+password");
-
+    
     if (!user) {
-      return res.status(401).json("User with this email does not exist!");
+      return res.status(401).json("User with this email does not exist!")
     }
-
-    const result = await bcrypt.compare(password, user.password);
+    const result = await bcrypt.compare(password, user.password)
 
     if (result) {
       const signData = {
@@ -60,21 +58,17 @@ export const login = async (req: Request, res: Response) => {
         id: user.id,
       }
 
-      const token = jwt.sign(signData, process.env.JWT_SECRET!);
+      const token = jwt.sign(signData, process.env.JWT_SECRET!)
 
-      return res.status(200).json({ ...signData, token });
+      return res.status(200).json({ ...signData, token })
     }
   } catch (error) {
-    return res.status(401).json(error);
+    return res.status(401).json(error)
   }
-};
+}
 
 export const getAllUsers = async (_: Request, res: Response) => {
-  try {
-    const data = await User.find();
+  const data = await User.find()
 
-    return res.status(200).json(data);
-  } catch (error) {
-    return res.status(400).json(error);
-  }
-};
+  return res.status(200).json(data)
+}
