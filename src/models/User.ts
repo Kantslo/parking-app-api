@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose"
 import { UserType } from "../types/user-types";
 import { v4 as uuid } from "uuid";
-const { String } = Schema.Types
+const { String, Boolean } = Schema.Types;
 
 const userSchema = new Schema<UserType>({
   name: {
@@ -22,7 +22,7 @@ const userSchema = new Schema<UserType>({
     default: uuid,
   },
   admin: {
-    type: Schema.Types.Boolean,
+    type: Boolean,
     default: false
   }
 });

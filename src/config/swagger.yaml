@@ -16,7 +16,7 @@ components:
       scheme: bearer
       bearerFormat: JWT
 paths:
-  /register:
+  /register/user:
     post:
       tags:
         - Auth
@@ -37,7 +37,7 @@ paths:
       responses:
         "201":
           description: user register successfully
-  /register admin:
+  /register/admin:
     post:
       tags:
         - Auth
@@ -55,11 +55,9 @@ paths:
                   type: string
                 email:
                   type: string
-                admin:
-                  type: boolean
       responses:
         "201":
-          description: admin register successfully
+          description: Admin registered successfully
   /login:
     post:
       tags:
