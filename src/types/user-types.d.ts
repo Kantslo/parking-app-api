@@ -8,6 +8,7 @@ export interface UserType extends NewUser {
   id: string;
 }
 
-export interface AdminType extends UserType {
-  admin: boolean
+export interface AdminType extends NewUser {
+  id: string;
+  admin: boolean;
 }

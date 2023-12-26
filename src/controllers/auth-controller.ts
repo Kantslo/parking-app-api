@@ -2,8 +2,9 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
 import User from "../models/User.js"
-import addUserSchema from "../schemas/add-user-schema.js";
 import Admin from "../models/Admin.js";
+import addUserSchema from "../schemas/add-user-schema.js";
+import addAdminSchema from "../schemas/add-admin-schema.js";
 
 export const createUser = async (req: Request, res: Response) => {
 
@@ -46,7 +47,7 @@ export const createAdmin = async (req: Request, res: Response) => {
   const { body } = req;
 
   try {
-    const validator = await addUserSchema(body);
+    const validator = await addAdminSchema(body);
 
     const { value, error } = validator.validate(body);
 
@@ -65,7 +66,7 @@ export const createAdmin = async (req: Request, res: Response) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const newAdmin = new User({
+    const newAdmin = new Admin({
       name,
       email,
       password: hashedPassword,
