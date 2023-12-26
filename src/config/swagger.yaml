@@ -5,7 +5,7 @@ info:
   version: 0.1.9
 
 servers:
-  - url: https://parking-app-api-production.up.railway.app/api
+  - url: parking-app-api-production.up.railway.app/api
     description: production server
   - url: http://localhost:3000/api
     description: local server
@@ -16,7 +16,7 @@ components:
       scheme: bearer
       bearerFormat: JWT
 paths:
-  /register/user:
+  /user:
     post:
       tags:
         - Auth
@@ -37,7 +37,7 @@ paths:
       responses:
         "201":
           description: user register successfully
-  /register/admin:
+  /admin:
     post:
       tags:
         - Auth

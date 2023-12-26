@@ -3,6 +3,7 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
 import User from "../models/User.js"
 import addUserSchema from "../schemas/add-user-schema.js";
+import Admin from "../models/Admin.js";
 
 export const createUser = async (req: Request, res: Response) => {
 
@@ -32,7 +33,6 @@ export const createUser = async (req: Request, res: Response) => {
       name, 
       email, 
       password: hashedPassword,
-      admin: false
     });
 
     await newUser.save();
@@ -56,7 +56,7 @@ export const createAdmin = async (req: Request, res: Response) => {
 
     const { name, email, password } = value;
 
-    const existingAdmin = await User.findOne({ email, admin: true });
+    const existingAdmin = await Admin.findOne({ email, admin: true });
 
     if (existingAdmin) {
       return res.status(401).json("Admin with this email already exists!");
@@ -69,7 +69,6 @@ export const createAdmin = async (req: Request, res: Response) => {
       name,
       email,
       password: hashedPassword,
-      admin: true,
     });
 
     await newAdmin.save();

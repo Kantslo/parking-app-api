@@ -4,8 +4,8 @@ import express from "express";
 
 const authRouter = express.Router();
 
-authRouter.post("/register", createUser);
-authRouter.post("/register", createAdmin);
+authRouter.post("/user", createUser);
+authRouter.post("/admin", createAdmin);
 authRouter.post("/login", login);
 authRouter.get("/users", authMiddleware, getAllUsers);
 
