@@ -77,3 +77,24 @@ paths:
       responses:
         "201":
           description: user login successfully
+  /vehicle:
+    post:
+      tags:
+        - Auth
+      requestBody:
+        description: adding vehicle request
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                name:
+                  type: string
+                stateNumber:
+                  type: string
+                carType:
+                  type: string
+      responses:
+        "201":
+          description: Vehicle added successfully!
