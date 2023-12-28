@@ -6,6 +6,7 @@ export interface NewUser {
 
 export interface UserType extends NewUser {
   id: string;
+  admin: boolean
 }
 
 export interface AdminType extends NewUser {

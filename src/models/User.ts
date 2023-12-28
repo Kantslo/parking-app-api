@@ -22,6 +22,10 @@ const userSchema = new Schema<UserType>({
     required: true,
     default: uuid,
   },
+  admin: {
+    type: Schema.Types.Boolean,
+    default: false
+  }
 });
 
 const User = model("User", userSchema);

@@ -113,7 +113,11 @@ export const login = async (req: Request, res: Response) => {
 }
 
 export const getAllUsers = async (_: Request, res: Response) => {
-  const data = await User.find()
+  try {
+    const data = await User.find()
 
   return res.status(200).json(data)
+  } catch (error) {
+    return res.status(400).json(error)
+  }
 }
