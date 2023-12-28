@@ -8,7 +8,7 @@ const authRouter = express.Router();
 authRouter.post("/user", createUser);
 authRouter.post("/admin", createAdmin);
 authRouter.post("/login", login);
-authRouter.post("/vehicle", createVehicle)
+authRouter.post("/vehicle", authMiddleware, createVehicle)
 authRouter.get("/users", authMiddleware, getAllUsers);
 
 export default authRouter;
