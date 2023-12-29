@@ -16,10 +16,12 @@ components:
       scheme: bearer
       bearerFormat: JWT
 paths:
-  /user:
+  /register:
     post:
       tags:
         - Auth
+      security:
+        - bearerAuth: []
       requestBody:
         description: user registration request
         required: true
@@ -37,27 +39,6 @@ paths:
       responses:
         "201":
           description: user register successfully
-  /admin:
-    post:
-      tags:
-        - Auth
-      requestBody:
-        description: admin registration request
-        required: true
-        content:
-          application/json:
-            schema:
-              type: "object"
-              properties:
-                name:
-                  type: string
-                password:
-                  type: string
-                email:
-                  type: string
-      responses:
-        "201":
-          description: Admin registered successfully
   /login:
     post:
       tags:
@@ -70,9 +51,9 @@ paths:
             schema:
               type: "object"
               properties:
-                password:
-                  type: string
                 email:
+                  type: string
+                password:
                   type: string
       responses:
         "201":

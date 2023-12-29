@@ -14,7 +14,7 @@ const vehicleSchema = new Schema<VehicleType>({
     type: String, 
     required: true
   },
-  stateNumber: {
+  plateNumber: {
     type: String,
     required: true
   },

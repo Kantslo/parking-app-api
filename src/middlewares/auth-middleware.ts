@@ -1,21 +1,27 @@
-import { NextFunction, Request, Response } from 'express'
-import jwt from 'jsonwebtoken'
+import { NextFunction, Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 
-const authMiddleware = (req:Request, res:Response, next: NextFunction) => {
-  const { authorization } = req.headers
+const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  const { authorization } = req.headers;
 
   if (!authorization) {
-    res.status(403).send()
-  } else {
-    const [, token ] = authorization.trim().split(' ')
+    return res.status(401).json({ error: 'Authorization header missing' });
+  }
 
+  const [, token] = authorization.trim().split(' ');
+
+  if (!token) {
+    return res.status(401).json({ error: 'Token missing' });
+  }
+
+  try {
     const verified = jwt.verify(token, process.env.JWT_SECRET!);
     if (verified) {
-      next()
-    } else {
-      res.status(403).send()
+      next();
     }
+  } catch (error) {
+      return res.status(401).json(error);
   }
-}
+};
 
 export default authMiddleware;

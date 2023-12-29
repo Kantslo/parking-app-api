@@ -1,6 +1,6 @@
 export interface VehicleType {
   userId: string;
   name: string;
-  stateNumber: string;
+  plateNumber: string;
   carType: string;
 }

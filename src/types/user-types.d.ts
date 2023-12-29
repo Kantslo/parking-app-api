@@ -2,11 +2,11 @@ export interface NewUser {
   name: string;
   email: string;
   password: string;
+  admin: boolean
 }
 
 export interface UserType extends NewUser {
   id: string;
-  admin: boolean
 }
 
 export interface AdminType extends NewUser {
