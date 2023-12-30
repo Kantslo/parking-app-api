@@ -68,7 +68,15 @@ export const createReservation = async (req: Request, res: Response) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    const hourlyCost = 1;
+    const parkingLot = await ParkingZone.findOne({ name: parkingZone  });
+
+    console.log(parkingLot);
+
+    if (!parkingLot) {
+      return res.status(404).json({ message: 'Parking Zone not found' });
+    }
+
+    const hourlyCost = parkingLot.costPerHour;
     const cost = (endTime.getTime() - startTime.getTime()) / (60 * 60 * 1000) * hourlyCost;
 
     if (user.balance < cost) {
@@ -92,5 +100,4 @@ export const createReservation = async (req: Request, res: Response) => {
   } catch (error) {
     return res.status(401).json(error);
   }
-
 }

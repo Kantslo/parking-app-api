@@ -5,11 +5,6 @@ import { v4 as uuid } from "uuid";
 const { String } = Schema.Types;
 
 const vehicleSchema = new Schema<VehicleType>({
-  userId: {
-    type: String,
-    required: true,
-    default: uuid
-  },
   name: {
     type: String, 
     required: true
@@ -22,6 +17,11 @@ const vehicleSchema = new Schema<VehicleType>({
     type: String,
     required: true
   },
+  id: {
+    type: String,
+    required: true,
+    default: uuid
+  }
 });
 
 const Vehicle = model('Vehicle', vehicleSchema);

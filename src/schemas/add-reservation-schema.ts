@@ -15,7 +15,7 @@ const addReservationSchema = async (data: ReservationType) => {
   const reservation = await Reservation.findOne({ taken: data.taken });
 
   return Joi.object<ReservationType>({
-    userId: Joi.string().required(),
+    userId: Joi.string(),
     vehicleId: Joi.string().required(),
     parkingZone: Joi.string().required(),
     startTime: Joi.date().required(),

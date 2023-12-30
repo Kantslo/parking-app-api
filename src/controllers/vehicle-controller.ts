@@ -13,7 +13,7 @@ export const createVehicle = async (req: Request, res: Response) => {
       return res.status(400).json(error.details);
     }
 
-    const { name, plateNumber, carType } = value;
+    const { name, plateNumber, carType, id } = value;
 
 
     const vehicle = await Vehicle.findOne({ plateNumber });
@@ -26,6 +26,7 @@ export const createVehicle = async (req: Request, res: Response) => {
       name,
       plateNumber,
       carType,
+      id
     });
 
     await newVehicle.save();

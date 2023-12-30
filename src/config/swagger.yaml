@@ -20,8 +20,6 @@ paths:
     post:
       tags:
         - Auth
-      security:
-        - bearerAuth: []
       requestBody:
         description: user registration request
         required: true
@@ -62,6 +60,8 @@ paths:
     post:
       tags:
         - Auth
+      security:
+        - bearerAuth: []
       requestBody:
         description: adding vehicle request
         required: true
@@ -72,10 +72,52 @@ paths:
               properties:
                 name:
                   type: string
-                stateNumber:
+                plateNumber:
                   type: string
                 carType:
                   type: string
       responses:
         "201":
           description: Vehicle added successfully!
+  /zone:
+    post:
+      tags:
+        - Auth
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: create parking zone request
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                name:
+                  type: string
+                address:
+                  type: string
+                costPerHour:
+                  type: number
+      responses:
+        "201":
+          description: Parking zone added successfully!
+  /reservation:
+    post:
+      tags:
+        - Auth
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: make reservation for the parking zone request
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                parkingZone:
+                  type: string
+      responses:
+        "201":
+          description: Reservation made successfully!

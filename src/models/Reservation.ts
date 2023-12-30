@@ -8,11 +8,9 @@ const { Boolean } = Schema.Types;
 const reservationSchema = new Schema<ReservationType>({
   userId: {
     type: String,
-    required: true,
   },
   vehicleId: {
     type: String,
-    required: true,
   },
   startTime: {
     type: Date,
