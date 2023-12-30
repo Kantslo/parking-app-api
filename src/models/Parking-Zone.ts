@@ -1,9 +1,9 @@
 import { Schema, model } from "mongoose";
-import { ParkingZone } from "../types/parking-types";
+import { ParkingZoneType } from "../types/parking-types";
 
 const { String } = Schema.Types;
 
-const parkingZoneSchema = new Schema<ParkingZone>({
+const parkingZoneSchema = new Schema<ParkingZoneType>({
   name: {
     type: String,
     required: true,
@@ -20,4 +20,4 @@ const parkingZoneSchema = new Schema<ParkingZone>({
 
 const ParkingZone = model("ParkingZone", parkingZoneSchema);
 
-export default parkingZoneSchema;
+export default ParkingZone;

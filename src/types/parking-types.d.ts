@@ -1,4 +1,4 @@
-export interface ParkingZone {
+export interface ParkingZoneType {
   name: string;
   address: string;
   costPerHour: number;

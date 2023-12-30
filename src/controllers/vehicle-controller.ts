@@ -16,9 +16,9 @@ export const createVehicle = async (req: Request, res: Response) => {
     const { name, plateNumber, carType } = value;
 
 
-    const existingVehicle = await Vehicle.findOne({ plateNumber });
+    const vehicle = await Vehicle.findOne({ plateNumber });
 
-    if (existingVehicle) {
+    if (vehicle) {
       return res.status(400).json("This vehicle has already been added!");
     }
 
