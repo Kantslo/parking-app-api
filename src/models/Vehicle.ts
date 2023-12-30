@@ -1,6 +1,5 @@
 import { Schema, model } from 'mongoose';
 import { VehicleType } from 'types/vehicle-types';
-import { v4 as uuid } from "uuid";
 
 const { String } = Schema.Types;
 
@@ -17,10 +16,9 @@ const vehicleSchema = new Schema<VehicleType>({
     type: String,
     required: true
   },
-  id: {
-    type: String,
+  userId: {
+    type: Schema.Types.String,
     required: true,
-    default: uuid
   }
 });
 

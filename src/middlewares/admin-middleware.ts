@@ -26,7 +26,7 @@ const adminMiddleware = async (req: Request, res: Response, next: NextFunction) 
 
     console.log(user)
 
-    if (verified && user && user.admin) {
+    if (verified && user.admin) {
       next();
     }
   } catch (error) {

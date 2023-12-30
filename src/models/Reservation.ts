@@ -6,11 +6,17 @@ const { Date } = Schema.Types;
 const { Boolean } = Schema.Types;
 
 const reservationSchema = new Schema<ReservationType>({
-  userId: {
+  user: {
     type: String,
+    required: true
   },
-  vehicleId: {
+  vehicle: {
     type: String,
+    required: true,
+  },
+  parkingZone: {
+    type: String,
+    required: true
   },
   startTime: {
     type: Date,
@@ -20,7 +26,7 @@ const reservationSchema = new Schema<ReservationType>({
     type: Date,
     required: true,
   },
-  taken: {
+  active: {
     type: Boolean,
     required: true,
   }

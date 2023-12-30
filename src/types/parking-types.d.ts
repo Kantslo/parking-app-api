@@ -1,14 +1,17 @@
+import { ObjectId } from "mongoose";
+
 export interface ParkingZoneType {
   name: string;
   address: string;
   costPerHour: number;
+  userId: ObjectId;
 }
 
 export interface ReservationType {
-  userId: string;
-  vehicleId: string;
+  user: string
+  vehicle: string;
   parkingZone: string;
-  startTime: Date;
-  endTime: Date;
-  taken: boolean;
+  startTime: date;
+  endTime: date;
+  active: boolean;
 }
