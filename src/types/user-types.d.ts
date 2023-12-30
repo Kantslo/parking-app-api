@@ -7,6 +7,7 @@ export interface NewUser {
 
 export interface UserType extends NewUser {
   id: string;
+  balance: number;
 }
 
 export interface AdminType extends NewUser {
