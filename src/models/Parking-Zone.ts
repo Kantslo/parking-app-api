@@ -2,6 +2,7 @@ import { Schema, model } from "mongoose";
 import { ParkingZoneType } from "../types/parking-types";
 
 const { String } = Schema.Types;
+const { Number } = Schema.Types;
 
 const parkingZoneSchema = new Schema<ParkingZoneType>({
   name: {
@@ -13,7 +14,7 @@ const parkingZoneSchema = new Schema<ParkingZoneType>({
     required: true,
   },
   costPerHour: {
-    type: Schema.Types.Number,
+    type: Number,
     required: true,
   }
 });

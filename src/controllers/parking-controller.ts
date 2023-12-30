@@ -29,7 +29,7 @@ export const createParkingZone = async (req: Request, res: Response) => {
     const newParkingZone = new ParkingZone({
       name,
       address,
-      costPerHour
+      costPerHour,
     })
 
     await newParkingZone.save();
