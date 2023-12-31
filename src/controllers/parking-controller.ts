@@ -42,9 +42,10 @@ export const createParkingZone = async (req: Request, res: Response) => {
 
 export const deleteParkingZone = async (req: Request, res: Response) => {
 
-  const { name } = req.params;
+  const { name } = req.body;
 
   try {
+
     const parkingZone = await ParkingZone.findOne({ name });
 
     if (!parkingZone) {
@@ -57,7 +58,6 @@ export const deleteParkingZone = async (req: Request, res: Response) => {
   } catch (error) {
     return res.status(400).json(error);
   }
-
 }
 
 export const createReservation = async (req: Request, res: Response) => {

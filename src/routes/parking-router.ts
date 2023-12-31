@@ -13,6 +13,6 @@ parkingRouter.post("/vehicle", authMiddleware, createVehicle);
 parkingRouter.post("/reservation", authMiddleware, createReservation);
 parkingRouter.get("/users", adminMiddleware, getAllUsers);
 parkingRouter.post("/zone", adminMiddleware, createParkingZone);
-parkingRouter.delete("/zone", adminMiddleware, deleteParkingZone);
+parkingRouter.delete("/zone/delete", adminMiddleware, deleteParkingZone);
 
 export default parkingRouter;
