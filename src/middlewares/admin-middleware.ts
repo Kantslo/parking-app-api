@@ -24,8 +24,6 @@ const adminMiddleware = async (req: Request, res: Response, next: NextFunction) 
 
     const user = jwt.decode(token) as DecodedUser;
 
-    console.log(user)
-
     if (verified && user.admin) {
       next();
     }

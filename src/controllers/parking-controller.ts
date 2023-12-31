@@ -40,6 +40,26 @@ export const createParkingZone = async (req: Request, res: Response) => {
   }
 };
 
+export const deleteParkingZone = async (req: Request, res: Response) => {
+
+  const { name } = req.params;
+
+  try {
+    const parkingZone = await ParkingZone.findOne({ name });
+
+    if (!parkingZone) {
+      return res.status(404).json({ message: 'Parking zone not found' });
+    }
+
+    await ParkingZone.findOneAndDelete({ name });
+
+    return res.status(200).json("Parking zone deleted successfully");
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+
+}
+
 export const createReservation = async (req: Request, res: Response) => {
 
   const { body } = req;
