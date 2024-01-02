@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import Vehicle from "../models/Vehicle.js";
-import addVehicleSchema from "../schemas/add-vehicle-schema.js";
+import { Vehicle } from "../models";
+import { addVehicleSchema } from "../schemas";
 
 export const createVehicle = async (req: Request, res: Response) => {
   const { body } = req;

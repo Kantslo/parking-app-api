@@ -1,6 +1,6 @@
 import Joi, { CustomHelpers } from "joi";
-import { ReservationType } from "../types/parking-types";
-import Reservation from "../models/Reservation";
+import { ReservationType } from "../types";
+import { Reservation } from "../models";
 
 
 const ifReservationExists = (reservation: ReservationType | null) => (value: string, helpers: CustomHelpers) => {

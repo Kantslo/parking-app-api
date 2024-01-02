@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { VehicleType } from 'types/vehicle-types';
+import { VehicleType } from '../types';
 
 const { String } = Schema.Types;
 

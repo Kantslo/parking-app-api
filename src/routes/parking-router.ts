@@ -1,9 +1,6 @@
 import express from "express";
-import authMiddleware from "../middlewares/auth-middleware.js";
-import adminMiddleware from "../middlewares/admin-middleware.js";
-import { createUser, getAllUsers, login } from "../controllers/auth-controller.js";
-import { createVehicle } from "../controllers/vehicle-controller.js";
-import { createParkingZone, createReservation, deleteParkingZone } from "../controllers/parking-controller.js";
+import { authMiddleware, adminMiddleware } from "../middlewares";
+import { createParkingZone, createReservation, deleteParkingZone, createVehicle, createUser, getAllUsers, login } from "../controllers";
 
 const parkingRouter = express.Router();
 

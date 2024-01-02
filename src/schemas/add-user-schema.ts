@@ -1,6 +1,6 @@
 import Joi, { CustomHelpers } from "joi";
-import User from "../models/User.js";
-import { NewUser } from "../types/user-types";
+import { NewUser } from "../types";
+import { User } from "../models";
 
 const ifUserExists = (user: NewUser | null) => (value: string, helpers: CustomHelpers) => {
   if (user) {

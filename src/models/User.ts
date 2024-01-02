@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose"
-import { UserType } from "../types/user-types";
+import { UserType } from "../types";
 import { v4 as uuid } from "uuid";
 
 const { String } = Schema.Types;

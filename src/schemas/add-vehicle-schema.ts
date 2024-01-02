@@ -1,6 +1,6 @@
 import Joi, { CustomHelpers } from "joi";
-import Vehicle from "../models/Vehicle.js";
-import { VehicleType } from "types/vehicle-types.js";
+import { VehicleType } from "types";
+import { Vehicle } from "../models";
 
 const ifVehicleExists = (vehicle: VehicleType | null) => (value: string, helpers: CustomHelpers) => {
   if (vehicle) {

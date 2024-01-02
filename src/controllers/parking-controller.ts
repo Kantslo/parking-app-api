@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
-import ParkingZone from "../models/Parking-Zone";
-import addParkingZoneSchema from "../schemas/add-parkingZone-schema";
-import addReservationSchema from "../schemas/add-reservation-schema";
-import Reservation from "../models/Reservation";
+import { ParkingZone, Reservation } from "../models";
+import { addParkingZoneSchema, addReservationSchema } from "../schemas"
 
 export const createParkingZone = async (req: Request, res: Response) => {
 

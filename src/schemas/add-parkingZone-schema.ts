@@ -1,6 +1,6 @@
 import Joi, { CustomHelpers } from "joi";
-import { ParkingZoneType } from "../types/parking-types";
-import ParkingZone from "../models/Parking-Zone";
+import { ParkingZoneType } from "../types";
+import { ParkingZone } from "../models"
 
 const ifParkingZoneExists = (parkingZone: ParkingZoneType | null) => (value: string, helpers: CustomHelpers) => {
   if (parkingZone) {

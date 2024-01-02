@@ -1,5 +1,5 @@
 import { Schema, model} from "mongoose";
-import { ReservationType } from "../types/parking-types";
+import { ReservationType } from "../types";
 
 const { String } = Schema.Types;
 const { Date } = Schema.Types;
