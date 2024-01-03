@@ -138,7 +138,6 @@ export const createReservation = async (req: Request, res: Response) => {
         }
   
         user.balance -= parkingCost;
-        console.log(`Successfully deducted ${parkingCost} from user ${user.id}'s balance.`);
   
         await user.save();
   

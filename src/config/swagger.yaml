@@ -192,6 +192,8 @@ paths:
     post:
       tags:
         - Auth
+      security:
+        - bearerAuth: []
       requestBody:
         description: make reservation for the parking zone request
         required: true
