@@ -81,6 +81,29 @@ paths:
       responses:
         "201":
           description: Vehicle added successfully!
+  /vehicle/edit:
+    post:
+      tags:
+        - Auth
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: adding vehicle request
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                name:
+                  type: string
+                plateNumber:
+                  type: string
+                carType:
+                  type: string
+      responses:
+        "201":
+          description: Vehicle added successfully!
   /vehicle/delete:
     delete:
       tags:
@@ -101,6 +124,29 @@ paths:
         "201":
           description: Vehicle deleted successfully!
   /zone:
+    post:
+      tags:
+        - Auth
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: create parking zone request
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                name:
+                  type: string
+                address:
+                  type: string
+                costPerHour:
+                  type: number
+      responses:
+        "201":
+          description: Parking zone added successfully!
+  /zone/edit:
     post:
       tags:
         - Auth
@@ -169,6 +215,8 @@ paths:
     post:
       tags:
         - Auth
+      security:
+        - bearerAuth: []
       requestBody:
         description: finish reservation for the parking zone request
         required: true

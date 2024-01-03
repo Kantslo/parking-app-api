@@ -97,6 +97,12 @@ export const createReservation = async (req: Request, res: Response) => {
 
     const { userId, vehiclePlateNumber, parkingZone, startTime } = value;
 
+    const reservation = await Reservation.findOne({ userId, active: true });
+
+    if (reservation) {
+      return res.status(401).json("Reservation already exists!");
+    }
+
     const zone = await ParkingZone.findOne({ name: parkingZone });
 
     if (!zone) {
