@@ -1,16 +1,18 @@
 import express from "express";
 import { authMiddleware, adminMiddleware } from "../middlewares";
-import { createParkingZone, createReservation, stopParking, deleteParkingZone, createVehicle, createUser, getAllUsers, login } from "../controllers";
+import { createParkingZone, createReservation, stopParking, getReservations, deleteParkingZone, createVehicle, getAllVehicles, createUser, getAllUsers, login } from "../controllers";
 
-const parkingRouter = express.Router();
+const router = express.Router();
 
-parkingRouter.post("/register", createUser);
-parkingRouter.post("/login", login);
-parkingRouter.post("/vehicle", authMiddleware, createVehicle);
-parkingRouter.post("/reservation", createReservation);
-parkingRouter.post("/reservation/finish", stopParking);
-parkingRouter.get("/users", adminMiddleware, getAllUsers);
-parkingRouter.post("/zone", adminMiddleware, createParkingZone);
-parkingRouter.delete("/zone/delete", adminMiddleware, deleteParkingZone);
+router.post("/register", createUser);
+router.post("/login", login);
+router.post("/vehicle", authMiddleware, createVehicle);
+router.post("vehicles", authMiddleware, getAllVehicles);
+router.post("/reservation", createReservation);
+router.post("/reservation/finish", stopParking);
+router.get("/reservations", authMiddleware, getReservations);
+router.get("/users", adminMiddleware, getAllUsers);
+router.post("/zone", adminMiddleware, createParkingZone);
+router.delete("/zone/delete", adminMiddleware, deleteParkingZone);
 
-export default parkingRouter;
+export default router;

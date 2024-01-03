@@ -151,3 +151,13 @@ export const stopParking = async (req: Request, res: Response) => {
     return res.status(500).json(error);
   }
 };
+
+export const getReservations = async (_: Request, res: Response) => {
+  try {
+    const reservations = await Reservation.find();
+
+    return res.status(200).json(reservations);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};

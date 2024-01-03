@@ -81,6 +81,25 @@ paths:
       responses:
         "201":
           description: Vehicle added successfully!
+  /vehicle/delete:
+    delete:
+      tags:
+        - Auth
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: delete vehicle request
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                id:
+                  type: string
+      responses:
+        "201":
+          description: Vehicle deleted successfully!
   /zone:
     post:
       tags:
@@ -104,6 +123,25 @@ paths:
       responses:
         "201":
           description: Parking zone added successfully!
+  /zone/delete:
+    delete:
+      tags:
+        - Auth
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: delete parking zone request
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                name:
+                  type: string
+      responses:
+        "201":
+          description: Parking zone deleted successfully!
   /reservation:
     post:
       tags:
@@ -123,7 +161,7 @@ paths:
                 parkingZone:
                   type: string
                 startTime:
-                  type: date
+                  type: string
       responses:
         "201":
           description: Reservation made successfully!
@@ -144,22 +182,3 @@ paths:
       responses:
         "201":
           description: Reservation finished successfully!
-  /zone/delete:
-    delete:
-      tags:
-        - Auth
-      security:
-        - bearerAuth: []
-      requestBody:
-        description: delete parking zone request
-        required: true
-        content:
-          application/json:
-            schema:
-              type: "object"
-              properties:
-                name:
-                  type: string
-      responses:
-        "201":
-          description: Parking zone deleted successfully!
