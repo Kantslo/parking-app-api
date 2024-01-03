@@ -59,6 +59,30 @@ export const deleteVehicle = async (req: Request, res: Response) => {
 
 }
 
+export const editVehicle = async (req: Request, res: Response) => {
+
+  const { vehicleId, name, plateNumber, carType } = req.body;
+
+  try {
+    const vehicle = await Vehicle.findById(vehicleId);
+
+    if (!vehicle) {
+      return res.status(404).json({ message: 'Vehicle not found' });
+    }
+
+    const updatedVehicle = await Vehicle.findByIdAndUpdate(vehicleId, {
+      name,
+      plateNumber,
+      carType,
+    }, { new: true });
+
+    return res.status(200).json(updatedVehicle);
+
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+}
+
 export const getAllVehicles = async (_: Request, res: Response) => {
   try {
     const vehicles = await Vehicle.find();

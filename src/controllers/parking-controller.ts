@@ -59,6 +59,31 @@ export const deleteParkingZone = async (req: Request, res: Response) => {
   }
 }
 
+export const editParkingZone = async (req: Request, res: Response) => {
+
+  const { zoneId, name, address, costPerHour } = req.body;
+
+  try {
+    const parkingZone = await ParkingZone.findOne({ zoneId });
+
+    if (!parkingZone) {
+      return res.status(404).json({ message: 'Parking zone not found' });
+    }
+
+    const updatedZone = await ParkingZone.findByIdAndUpdate(zoneId, {
+      name,
+      address,
+      costPerHour,
+    }, { new: true });
+
+    await updatedZone!.save();
+
+    return res.status(200).json(updatedZone);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+}
+
 export const createReservation = async (req: Request, res: Response) => {
   const { body } = req;
 
@@ -86,7 +111,7 @@ export const createReservation = async (req: Request, res: Response) => {
 
     const currentTime = new Date();
 
-    cron.schedule('*/1 * * * *', async () => {
+    cron.schedule('*/10 * * * *', async () => {
       if (currentTime > startTime) {
         const timeDifference = currentTime.getTime() - startTime;
         const hoursParked = timeDifference / (1000 * 60 * 60);

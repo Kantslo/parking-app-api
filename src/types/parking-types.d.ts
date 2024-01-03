@@ -1,6 +1,7 @@
 import { ObjectId } from "mongoose";
 
 export interface ParkingZoneType {
+  id: string;
   name: string;
   address: string;
   costPerHour: number;
