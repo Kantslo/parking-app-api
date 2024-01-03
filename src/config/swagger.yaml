@@ -76,6 +76,8 @@ paths:
                   type: string
                 carType:
                   type: string
+                userId:
+                  type: string
       responses:
         "201":
           description: Vehicle added successfully!
@@ -106,8 +108,6 @@ paths:
     post:
       tags:
         - Auth
-      security:
-        - bearerAuth: []
       requestBody:
         description: make reservation for the parking zone request
         required: true
@@ -116,11 +116,34 @@ paths:
             schema:
               type: "object"
               properties:
+                userId:
+                  type: string
+                vehiclePlateNumber:
+                  type: string
                 parkingZone:
                   type: string
+                startTime:
+                  type: date
       responses:
         "201":
           description: Reservation made successfully!
+  /reservation/finish:
+    post:
+      tags:
+        - Auth
+      requestBody:
+        description: finish reservation for the parking zone request
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                reservationId:
+                  type: string
+      responses:
+        "201":
+          description: Reservation finished successfully!
   /zone/delete:
     delete:
       tags:

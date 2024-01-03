@@ -1,16 +1,17 @@
 import { Schema, model} from "mongoose";
 import { ReservationType } from "../types";
+import { v4 as uuid } from "uuid";
 
 const { String } = Schema.Types;
 const { Date } = Schema.Types;
 const { Boolean } = Schema.Types;
 
 const reservationSchema = new Schema<ReservationType>({
-  user: {
+  userId: {
     type: String,
     required: true
   },
-  vehicle: {
+  vehiclePlateNumber: {
     type: String,
     required: true,
   },
@@ -24,12 +25,17 @@ const reservationSchema = new Schema<ReservationType>({
   },
   endTime: {
     type: Date,
-    required: true,
   },
   active: {
     type: Boolean,
     required: true,
-  }
+    default: true,
+  },
+  id: {
+    type: String,
+    required: true,
+    default: uuid,
+  },
 });
 
 const Reservation = model("Reservation", reservationSchema);

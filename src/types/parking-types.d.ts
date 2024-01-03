@@ -8,10 +8,11 @@ export interface ParkingZoneType {
 }
 
 export interface ReservationType {
-  user: string
-  vehicle: string;
+  userId: string
+  vehiclePlateNumber: string;
   parkingZone: string;
   startTime: date;
   endTime: date;
   active: boolean;
+  id: string;
 }

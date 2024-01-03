@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ParkingZone, Reservation } from "../models";
+import { ParkingZone, Reservation, User } from "../models";
 import { addParkingZoneSchema, addReservationSchema } from "../schemas"
 
 export const createParkingZone = async (req: Request, res: Response) => {
@@ -59,36 +59,91 @@ export const deleteParkingZone = async (req: Request, res: Response) => {
 }
 
 export const createReservation = async (req: Request, res: Response) => {
-
   const { body } = req;
 
   try {
-    
     const validator = await addReservationSchema(body);
-
     const { value, error } = validator.validate(body);
 
     if (error) {
       return res.status(401).json(error);
     }
 
-    const { user, vehicle, parkingZone } = value;
+    const { userId, vehiclePlateNumber, parkingZone, startTime } = value;
 
-    const startTime = new Date();
-    const endTime = new Date(startTime.getTime() + 60 * 60 * 1000);
+    const zone = await ParkingZone.findOne({ name: parkingZone });
 
+    if (!zone) {
+      return res.status(404).json("Parking zone not found");
+    }
 
-    const newReservation = new Reservation({
-      user,
-      vehicle,
-      parkingZone,
-      startTime,
-      endTime,
-    });
+    const user = await User.findOne({ id: userId });
 
-    await newReservation.save();
+    if (!user) {
+      return res.status(404).json("User not found");
+    }
 
+    const currentTime = new Date();
+
+    if (currentTime > startTime) {
+      const timeDifference = currentTime.getTime() - startTime;
+      const hoursParked = timeDifference / (1000 * 60 * 60);
+      const parkingCost = zone.costPerHour * hoursParked;
+
+      const newReservation = new Reservation({
+        userId,
+        vehiclePlateNumber,
+        parkingZone,
+        startTime,
+        status: true,
+      });
+
+      if (user.balance < parkingCost) {
+        newReservation.active = false;
+        await newReservation.save();
+        return res.status(201).json("Not enough money to cover the parking cost");
+      }
+
+      user.balance -= parkingCost;
+      console.log(`Successfully deducted ${parkingCost} from user ${user.id}'s balance.`);
+
+      await user.save();
+
+      await newReservation.save();
+
+      if (newReservation.active === false) {
+        return res.status(201).json("Parking stopped");
+      }
+
+      return res.status(201).json(newReservation);
+    } else {
+      return res.status(400).json({ message: "Invalid start time for parking" });
+    }
   } catch (error) {
     return res.status(401).json(error);
   }
-}
+};
+
+export const stopParking = async (req: Request, res: Response) => {
+  const { reservationId } = req.body;
+
+  try {
+    const reservation = await Reservation.findOne({ id: reservationId });
+
+    if (!reservation) {
+      return res.status(404).json("Reservation not found");
+    }
+
+    if (reservation.active === false) {
+      return res.status(400).json("Parking is already stopped");
+    }
+
+    reservation.active = false;
+    reservation.endTime = new Date();
+    await reservation.save();
+
+    return res.status(200).json(reservation);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
