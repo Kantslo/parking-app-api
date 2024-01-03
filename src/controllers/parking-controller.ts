@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { ParkingZone, Reservation, User } from "../models";
 import { addParkingZoneSchema, addReservationSchema } from "../schemas"
+import cron from "node-cron";
 
 export const createParkingZone = async (req: Request, res: Response) => {
 
@@ -85,40 +86,43 @@ export const createReservation = async (req: Request, res: Response) => {
 
     const currentTime = new Date();
 
-    if (currentTime > startTime) {
-      const timeDifference = currentTime.getTime() - startTime;
-      const hoursParked = timeDifference / (1000 * 60 * 60);
-      const parkingCost = zone.costPerHour * hoursParked;
-
-      const newReservation = new Reservation({
-        userId,
-        vehiclePlateNumber,
-        parkingZone,
-        startTime,
-        status: true,
-      });
-
-      if (user.balance < parkingCost) {
-        newReservation.active = false;
+    cron.schedule('*/1 * * * *', async () => {
+      if (currentTime > startTime) {
+        const timeDifference = currentTime.getTime() - startTime;
+        const hoursParked = timeDifference / (1000 * 60 * 60);
+        const parkingCost = zone.costPerHour * hoursParked;
+  
+        const newReservation = new Reservation({
+          userId,
+          vehiclePlateNumber,
+          parkingZone,
+          startTime,
+          status: true,
+        });
+  
+        if (user.balance < parkingCost) {
+          newReservation.active = false;
+          await newReservation.save();
+          return res.status(201).json("Not enough money to cover the parking cost");
+        }
+  
+        user.balance -= parkingCost;
+        console.log(`Successfully deducted ${parkingCost} from user ${user.id}'s balance.`);
+  
+        await user.save();
+  
         await newReservation.save();
-        return res.status(201).json("Not enough money to cover the parking cost");
+  
+        if (newReservation.active === false) {
+          return res.status(201).json("Parking stopped");
+        }
+  
+        return res.status(201).json(newReservation);
+      } else {
+        return res.status(400).json({ message: "Invalid start time for parking" });
       }
+    });
 
-      user.balance -= parkingCost;
-      console.log(`Successfully deducted ${parkingCost} from user ${user.id}'s balance.`);
-
-      await user.save();
-
-      await newReservation.save();
-
-      if (newReservation.active === false) {
-        return res.status(201).json("Parking stopped");
-      }
-
-      return res.status(201).json(newReservation);
-    } else {
-      return res.status(400).json({ message: "Invalid start time for parking" });
-    }
   } catch (error) {
     return res.status(401).json(error);
   }
