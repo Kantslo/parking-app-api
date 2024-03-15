@@ -14,7 +14,7 @@ The Parking App API is a Node.js application built with Express.js, MongoDB, and
 - **Admin Panel**: Accessible with the following login information:
   - Email: kantslo@mail.com
   - Password: test0013
-    ## Testing Parking Zone
+## Testing Parking Zone
 For testing purposes, you can use the following information about a parking zone:
 - **Name**: A-001
 - **Address**: Rustaveli
