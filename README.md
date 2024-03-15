@@ -11,6 +11,9 @@ The Parking App API is a Node.js application built with Express.js, MongoDB, and
 - **Parking Spot Management**: CRUD operations for managing parking spots, including adding, updating, and deleting spots.
 - **Booking Management**: Endpoint for users to book parking spots, with features such as checking availability and making reservations.
 - **User Management**: User registration functionalities.
+- **Admin Panel**: Accessible with the following login information:
+  - Email: kantslo@mail.com
+  - Password: test0013
 - **Data Validation**: Input validation and error handling to ensure data integrity and security.
 - **Middleware**: Custom middleware for logging, error handling, and authentication.
 
