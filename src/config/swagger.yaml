@@ -9,13 +9,16 @@ servers:
     description: production server
   - url: http://localhost:3000/api
     description: local server
+
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+
 paths:
+  # Auth Routes
   /register:
     post:
       tags:
@@ -56,10 +59,12 @@ paths:
       responses:
         "201":
           description: user login successfully
+
+  # Vehicle Management Routes
   /vehicle:
     post:
       tags:
-        - Auth
+        - Vehicle Management
       security:
         - bearerAuth: []
       requestBody:
@@ -84,7 +89,7 @@ paths:
   /vehicle/edit:
     post:
       tags:
-        - Auth
+        - Vehicle Management
       security:
         - bearerAuth: []
       requestBody:
@@ -107,7 +112,7 @@ paths:
   /vehicle/delete:
     delete:
       tags:
-        - Auth
+        - Vehicle Management
       security:
         - bearerAuth: []
       requestBody:
@@ -123,10 +128,12 @@ paths:
       responses:
         "201":
           description: Vehicle deleted successfully!
+
+  # Parking Zone Management Routes
   /zone:
     post:
       tags:
-        - Auth
+        - Parking Zone Management
       security:
         - bearerAuth: []
       requestBody:
@@ -149,7 +156,7 @@ paths:
   /zone/edit:
     post:
       tags:
-        - Auth
+        - Parking Zone Management
       security:
         - bearerAuth: []
       requestBody:
@@ -172,7 +179,7 @@ paths:
   /zone/delete:
     delete:
       tags:
-        - Auth
+        - Parking Zone Management
       security:
         - bearerAuth: []
       requestBody:
@@ -188,10 +195,12 @@ paths:
       responses:
         "201":
           description: Parking zone deleted successfully!
+
+  # Reservation Management Routes
   /reservation:
     post:
       tags:
-        - Auth
+        - Reservation Management
       security:
         - bearerAuth: []
       requestBody:
@@ -216,7 +225,7 @@ paths:
   /reservation/finish:
     post:
       tags:
-        - Auth
+        - Reservation Management
       security:
         - bearerAuth: []
       requestBody:
